@@ -1,6 +1,6 @@
 # physarumSlime
 
-A [physarum](https://cargocollective.com/sagejenson/physarum) slime simulation.
+A [physarum](https://en.wikipedia.org/wiki/Physarum_polycephalum#Situational_behavior) slime simulation.
 
 Inspired completely by [Sebastian Lague's video](https://www.youtube.com/watch?v=X-iSQQgOd1A)
 
@@ -16,8 +16,6 @@ The simulation works as follows:
 - The agents steer towards directions with stronger trails, by sampling the trail strength at points in front of them.
 
 Surprisingly, this simple algorithm is enough to create beatiful patterns.
-
-Again, see [Sebastian Lague's video](https://www.youtube.com/watch?v=X-iSQQgOd1A) for a fuller description of the algorithm.
 
 ## Implementation nuances
 The implementation of said algorithm is like so:
@@ -36,5 +34,6 @@ In this way, GPU parallelization is acheived and so performance is very good.
 ## Resources
 In order of usefulness:
 - [shader and ping pong buffer example](https://github.com/openframeworks/openFrameworks/blob/master/examples/gl/gpuParticleSystemExample)
+- [algorithm description](https://cargocollective.com/sagejenson/physarum)
 - [shader tutorial (official docs)](https://openframeworks.cc/ofBook/chapters/shaders.html)
 - [other useful stuff and a colorscheme](http://maciejmatyka.blogspot.com/2022/01/compute-shaders-in-open-frameworks.html)
