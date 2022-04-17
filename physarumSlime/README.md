@@ -2,12 +2,10 @@
 
 A [physarum](https://en.wikipedia.org/wiki/Physarum_polycephalum#Situational_behavior) slime simulation.
 
-Inspired completely by [Sebastian Lague's video](https://www.youtube.com/watch?v=X-iSQQgOd1A)
+Inspired completely by [Sebastian Lague's video](https://www.youtube.com/watch?v=X-iSQQgOd1A) and also the comments in [this](https://www.youtube.com/watch?v=vVrQjbX2zLc) video.
 
 ## Screenshots
-Have a look at the screenshots folder if you don't want to compile the source code yourself.
-
-The images in the folder were run with resolution 2560x1440 and 1 million agents, managing around 30fps using a 1660Ti graphics card.
+The images in the screenshots folder were run with resolution 2560x1440 and 1 million agents, managing around 30fps using a 1660Ti graphics card.
 
 ## Simulation algorithm
 The simulation works as follows:
@@ -29,7 +27,7 @@ The implementation of said algorithm is like so:
   - activate a shader, colorShader, to apply a color lookup table based on the greyscale trailMapBuffer value (or just pass it through).
   - draw trailMapBuffer to the screen
 
-In this way, GPU parallelization is acheived and so performance is very good.
+In this way we can make use of the GPU for good performance.
 
 ## Resources
 In order of usefulness:
