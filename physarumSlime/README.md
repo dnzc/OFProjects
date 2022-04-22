@@ -32,7 +32,7 @@ The simulation works as follows:
 - The agents move around at a constant speed, leaving trails which fade and diffuse over time.
 - The agents steer towards directions with stronger trails, by sampling the trail strength at points in front of them.
 
-Surprisingly, this simple algorithm is enough to create beautiful patterns (and also [solve shortest path problems](https://en.wikipedia.org/wiki/Physarum_polycephalum#Situational_behavior).
+Surprisingly, this simple algorithm is enough to create beautiful patterns (and also [solve shortest path problems](https://en.wikipedia.org/wiki/Physarum_polycephalum#Situational_behavior)).
 
 ## Implementation nuances
 
