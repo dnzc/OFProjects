@@ -2,6 +2,8 @@
 
 A [physarum](https://en.wikipedia.org/wiki/Physarum_polycephalum#Situational_behavior) slime simulation.
 
+![screenshot](screenshots/v2_color_cosine.png)
+
 Inspired completely by [Sebastian Lague's video](https://www.youtube.com/watch?v=X-iSQQgOd1A) and also the comments in [this](https://www.youtube.com/watch?v=vVrQjbX2zLc) video.
 
 ## Screenshots
@@ -11,6 +13,16 @@ Using a 1660Ti graphics card, the following resolutions are displayed in the [sc
 v1: 2560x1440, 1 million agents.
 
 v2: 3200x1800, 1.6 million agents.
+
+## Run yourself
+
+[Download and setup](https://openframeworks.cc/download/) openFrameworks. Then create a new app, and replace the bin/ and src/ folders with ones from this repository. Compile and run. (Slight tweaks may be needed to get the code to work on your specific system)
+
+
+
+---
+
+
 
 ## Simulation algorithm
 
@@ -52,5 +64,3 @@ In order of usefulness:
 - [compute shader walkthrough and a colorscheme](http://maciejmatyka.blogspot.com/2022/01/compute-shaders-in-open-frameworks.html)
 - [algorithm description](https://cargocollective.com/sagejenson/physarum)
 - [shader tutorial (official docs)](https://openframeworks.cc/ofBook/chapters/shaders.html)
-  
-  
