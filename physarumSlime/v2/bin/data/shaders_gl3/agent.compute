@@ -1,0 +1,92 @@
+#version 440
+
+uniform float speed;
+uniform float turnSpeed;
+uniform float dt;
+uniform ivec2 screenSize;
+uniform float sensorAngleSpacing;
+uniform float sensorOffsetDist;
+
+layout (binding = 0) buffer a {
+    vec4 agents[]; // x, y, angle, species
+};
+
+layout(binding = 1) buffer t {
+    vec4 trailMap[];
+};
+
+layout(local_size_x = 1024, local_size_y = 1, local_size_z = 1) in;
+
+int idx(int x, int y) {
+    return x + y*screenSize.x;
+}
+
+uint hash(uint state) {
+    state ^= 2747636419u;
+    state *= 2654435769u;
+    state ^= state >> 16;
+    state *= 2654435769u;
+    state ^= state >> 16;
+    state *= 2654435769u;
+    return state;
+}
+
+float sense(vec2 agentPos, float agentAngle, float sensorAngleOffset) {
+    float absAngle = agentAngle + sensorAngleOffset;
+    vec2 sensorDir = vec2(cos(absAngle), sin(absAngle));
+    vec2 sensorPos = agentPos + sensorOffsetDist * sensorDir;
+    float sum = 0;
+    for (int dy = -0; dy <= 0; ++dy) {
+		for (int dx = -0; dx <= 0; ++dx) {
+			int x = (int(sensorPos.x) + dx + screenSize.x) % screenSize.x;
+			int y = (int(sensorPos.y) + dy + screenSize.y) % screenSize.y;
+            sum += trailMap[idx(x, y)].x;
+		}
+    }
+
+    return sum;
+}
+
+void main(void) {
+
+    // MOVE
+
+    vec4 agent = agents[gl_GlobalInvocationID.x];
+    float angle = agent.z;
+
+    vec2 direction = vec2(cos(angle), sin(angle));
+
+    vec2 newPos = agent.xy + speed*direction*dt;
+
+    // wrap around
+    while(newPos.x < 0) newPos.x += screenSize.x;
+    while(newPos.x >= screenSize.x) newPos.x -= screenSize.x;
+    while(newPos.y < 0) newPos.y += screenSize.y;
+    while(newPos.y >= screenSize.y) newPos.y -= screenSize.y;
+
+    agents[gl_GlobalInvocationID.x].xy = newPos;
+
+    // update trail
+    trailMap[idx(int(newPos.x), int(newPos.y))] = vec4(1.0);
+
+    // STEER
+    float weightForward = sense(newPos, angle, 0);
+    float weightLeft = sense(newPos, angle, sensorAngleSpacing);
+    float weightRight = sense(newPos, angle, -sensorAngleSpacing);
+
+    //float randomSteerStrength = float(  hash(uint( pos.x + pos.y*screenSize.x + hash(uint(vTexCoord.x)) ))  ) / 4294967295.0;
+    float randomSteerStrength = 0.5;
+
+    // turn randomly
+    if(weightForward < weightLeft && weightForward < weightRight) {
+        angle += (2*randomSteerStrength-1) * turnSpeed * dt;
+    // turn right
+    } else if (weightRight > weightLeft) {
+        angle -= randomSteerStrength * turnSpeed * dt;
+    // turn left
+    } else if (weightRight < weightLeft) {
+        angle += randomSteerStrength * turnSpeed * dt;
+    }
+    agents[gl_GlobalInvocationID.x].z = angle;
+
+}
