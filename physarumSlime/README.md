@@ -40,8 +40,8 @@ Surprisingly, this simple algorithm is enough to create beautiful patterns (and 
 
 In v1, we implement the above algorithm like so:
 
-- store a texture, agentBuffer, where each pixel represents an agent, and the r, g, b values of each pixel are the agents x position, y position and angle respectively. Note that we use a ping pong buffer to reduce screen flicker.
-- store a texture, trailMapBuffer, which is essentially the screen i.e. contains the greyscale trail values. (not a ping pong buffer, to avoid screen flickering)
+- store a texture, agentBuffer, where each pixel represents an agent, and the r, g, b values of each pixel are the agents x position, y position and angle respectively. Note the use of a ping pong buffer.
+- store a texture, trailMapBuffer, which is essentially the screen i.e. contains the greyscale trail values.
 - in each update step:
   - activate a shader, agentShader, and draw agentBuffer onto itself (ping pong), which allows agentShader to be used to update each agent.
   - activate a shader, effectShader, and draw trailMapBuffer onto itself, which allows effectShader to be used to apply the fade and blur effects.
@@ -54,7 +54,9 @@ In this way we achieve parallelization.
 
 #### v2
 
-The v1 code was not optimal, achieving 15fps on 5120x2880, 4M agents - this slowness was probably due to inefficient texture accesses by the vertex shader. In v2, we change the update method to use a compute shader instead, operating on ofBufferObjects instead of ofFbos. This achieves much better results, handling 8000x4500, 10M agents at around 25fps.
+The v1 code was not optimal, achieving 15fps on 5120x2880, 4M agents - this slowness was probably due to inefficient texture accesses by the vertex shader.
+
+In v2, we change the update method to use a compute shader instead, operating on ping pong ofBufferObjects instead of ofFbos. This achieves much better results, handling 8000x4500, 10M agents at around 25fps.
 
 ## Resources
 
