@@ -1,0 +1,13 @@
+\begindata
+
+PATH_VALUES = ( '../src/kernels' )
+
+PATH_SYMBOLS = ( 'A' )
+
+KERNELS_TO_LOAD = (
+    '$A/latest_leapseconds.tls',
+    '$A/de432s.bsp',
+    '$A/gm_de431.tpc',
+)
+
+\begintext

@@ -524,7 +524,40 @@ obj/linux64/Release/src/main.o: \
  /home/dnzc/OpenFrameworks/libs/openFrameworks/3d/of3dUtils.h \
  /home/dnzc/OpenFrameworks/libs/openFrameworks/3d/ofCamera.h \
  /home/dnzc/OpenFrameworks/libs/openFrameworks/3d/ofEasyCam.h \
- /home/dnzc/Github/OFProjects/planetaryOrbit/src/ofApp.h
+ /home/dnzc/Github/OFProjects/planetaryOrbit/src/ofApp.h \
+ /home/dnzc/Github/OFProjects/planetaryOrbit/src/simulator.h \
+ /home/dnzc/cspice/include/SpiceUsr.h \
+ /home/dnzc/cspice/include/SpiceZpl.h \
+ /home/dnzc/cspice/include/SpiceZdf.h \
+ /home/dnzc/cspice/include/SpiceErr.h /home/dnzc/cspice/include/SpiceEK.h \
+ /home/dnzc/cspice/include/SpiceFrm.h \
+ /home/dnzc/cspice/include/SpiceCel.h /home/dnzc/cspice/include/SpiceCK.h \
+ /home/dnzc/cspice/include/SpiceSCLK.h \
+ /home/dnzc/cspice/include/SpiceSPK.h /home/dnzc/cspice/include/SpiceGF.h \
+ /home/dnzc/cspice/include/SpiceOccult.h \
+ /home/dnzc/cspice/include/SpiceDAS.h \
+ /home/dnzc/cspice/include/SpiceDLA.h \
+ /home/dnzc/cspice/include/SpiceDSK.h \
+ /home/dnzc/cspice/include/SpiceDtl.h \
+ /home/dnzc/cspice/include/SpiceSrf.h \
+ /home/dnzc/cspice/include/SpiceOsc.h \
+ /home/dnzc/cspice/include/SpiceZpr.h \
+ /home/dnzc/cspice/include/SpicePln.h \
+ /home/dnzc/cspice/include/SpiceEll.h \
+ /home/dnzc/cspice/include/SpiceZim.h \
+ /home/dnzc/cspice/include/SpiceZrnm.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxGui.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxToggle.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxBaseGui.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxSlider.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxInputField.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxGuiUtils.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxSliderGroup.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxGuiGroup.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxButton.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxLabel.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxColorPicker.h \
+ /home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxPanel.h
 /home/dnzc/OpenFrameworks/libs/openFrameworks/ofMain.h:
 /home/dnzc/OpenFrameworks/libs/openFrameworks/utils/ofConstants.h:
 /home/dnzc/OpenFrameworks/libs/tess2/include/tesselator.h:
@@ -1067,3 +1100,39 @@ obj/linux64/Release/src/main.o: \
 /home/dnzc/OpenFrameworks/libs/openFrameworks/3d/ofCamera.h:
 /home/dnzc/OpenFrameworks/libs/openFrameworks/3d/ofEasyCam.h:
 /home/dnzc/Github/OFProjects/planetaryOrbit/src/ofApp.h:
+/home/dnzc/Github/OFProjects/planetaryOrbit/src/simulator.h:
+/home/dnzc/cspice/include/SpiceUsr.h:
+/home/dnzc/cspice/include/SpiceZpl.h:
+/home/dnzc/cspice/include/SpiceZdf.h:
+/home/dnzc/cspice/include/SpiceErr.h:
+/home/dnzc/cspice/include/SpiceEK.h:
+/home/dnzc/cspice/include/SpiceFrm.h:
+/home/dnzc/cspice/include/SpiceCel.h:
+/home/dnzc/cspice/include/SpiceCK.h:
+/home/dnzc/cspice/include/SpiceSCLK.h:
+/home/dnzc/cspice/include/SpiceSPK.h:
+/home/dnzc/cspice/include/SpiceGF.h:
+/home/dnzc/cspice/include/SpiceOccult.h:
+/home/dnzc/cspice/include/SpiceDAS.h:
+/home/dnzc/cspice/include/SpiceDLA.h:
+/home/dnzc/cspice/include/SpiceDSK.h:
+/home/dnzc/cspice/include/SpiceDtl.h:
+/home/dnzc/cspice/include/SpiceSrf.h:
+/home/dnzc/cspice/include/SpiceOsc.h:
+/home/dnzc/cspice/include/SpiceZpr.h:
+/home/dnzc/cspice/include/SpicePln.h:
+/home/dnzc/cspice/include/SpiceEll.h:
+/home/dnzc/cspice/include/SpiceZim.h:
+/home/dnzc/cspice/include/SpiceZrnm.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxGui.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxToggle.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxBaseGui.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxSlider.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxInputField.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxGuiUtils.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxSliderGroup.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxGuiGroup.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxButton.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxLabel.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxColorPicker.h:
+/home/dnzc/OpenFrameworks/addons/ofxGui/src/ofxPanel.h:

@@ -37,7 +37,7 @@ OF_ROOT = /home/dnzc/OpenFrameworks
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_EXTERNAL_SOURCE_PATHS = 
+PROJECT_EXTERNAL_SOURCE_PATHS = /home/dnzc/cspice/include
 
 ################################################################################
 # PROJECT EXCLUSIONS
@@ -77,6 +77,7 @@ OF_ROOT = /home/dnzc/OpenFrameworks
 # incorporated directly into the final executable application binary.
 ################################################################################
 # PROJECT_LDFLAGS=-Wl,-rpath=./libs
+PROJECT_LDFLAGS += -l/home/dnzc/cspice/lib/cspice.a
 
 ################################################################################
 # PROJECT DEFINES

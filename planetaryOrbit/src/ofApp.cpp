@@ -1,15 +1,33 @@
 #include "ofApp.h"
+#include "SpiceUsr.h"
+#include <iostream>
+#include <cmath>
+#include <vector>
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+    simulator.generateRealPaths();
+    simulator.generateCowellPaths();
+
+    gui.setup();
+    gui.setPosition(20, 350);
+    gui.add(m_showRealPaths.setup("show real paths", true));
+    gui.add(m_showKeplerPaths.setup("show kepler paths", false));
+    gui.add(m_showCowellPaths.setup("show cowell paths", false));
+    gui.add(m_simSpeedSlider.setup("time speedup factor", 6000000, 1000000, 30000000));
+    gui.add(m_playReal.setup("play real"));
+    gui.add(m_playKepler.setup("play kepler"));
+    gui.add(m_playCowell.setup("play cowell"));
+
+    // lock fps to display
 	ofSetVerticalSync(true);
 
-	// this uses depth information for occlusion
-	// rather than always drawing things on top of each other
-	ofEnableDepthTest();
+    // circles are drawn as a polygon with a high number of sides
+    ofSetCircleResolution(64);
 
-	ofSetCircleResolution(64);
 	bHelpText = true;
+	bDrawGrid = true;
 }
 
 //--------------------------------------------------------------
@@ -22,73 +40,72 @@ void ofApp::draw(){
 
     ofBackground(20);
 	cam.begin();
-    ofSetConeResolution(20, 2);
-    ofSetCylinderResolution(20, 2);
-    ofEnableDepthTest();
-    ofSetColor(ofColor::red);//RIGHT
-    ofDrawCone(100, 0, 0, 50, 100);
+	// use depth information for occlusion, rather than always drawing things on top of each other
+	ofEnableDepthTest();
+
+    if(bDrawGrid) {
+        ofDrawGrid(100, 4, true, true, true, true);
+        // draw scales
+        std::stringstream ss;
+        ss << "  /10^" << simulator.getScale() << "m";
+        ofDrawBitmapString(ss.str().c_str(), glm::vec3(450, 0, 0));
+        ofDrawBitmapString(ss.str().c_str(), glm::vec3(0, 450, 0));
+        ofDrawBitmapString(ss.str().c_str(), glm::vec3(0, 0, 450));
+    } else {
+        ofDrawAxis(50);
+    }
+
+    if(m_showRealPaths) {
+        ofSetColor(ofColor::white);
+        for(auto path : simulator.getPaths("real")) {
+            path.draw();
+        }
+    }
+
+    if(m_showCowellPaths) {
+        ofSetColor(ofColor::purple);
+        for(auto path : simulator.getPaths("cowell")) {
+            path.draw();
+        }
+    }
     
-    ofSetColor(ofColor::white);//LEFT
-    ofDrawSphere(-100, 0, 0, 50);
-    
-    ofSetColor(ofColor::blue);//BOTTOM
-    ofDrawBox(0, 100, 0, 100);
-    
-    ofSetColor(ofColor::cyan);//TOP
-    ofDrawCylinder(0, -100, 0, 50, 100);
-    
-    ofSetColor(ofColor::yellow);//FRONT
-    ofDrawBox(0, 0, 100, 100);
-    
-    ofSetColor(ofColor::magenta);//BACK
-    ofDrawBox(0, 0, -100, 100);
-    
-    ofDrawGrid(20,10,true,true,true,true);
     ofDisableDepthTest();
     cam.end();
 	drawInteractionArea();
-	ofSetColor(255);
 
     if (bHelpText) {
         stringstream ss;
-        ss << "FPS: " << ofToString(ofGetFrameRate(),0) <<endl<<endl;
-        ss << "MODE: " << (cam.getOrtho()?"ORTHO":"PERSPECTIVE")<<endl;
-        ss << "MOUSE INPUT ENABLED: " << (cam.getMouseInputEnabled()?"TRUE":"FALSE")<<endl;
-        ss << "INERTIA ENABLED: " << (cam.getInertiaEnabled()?"TRUE":"FALSE")<<endl;
-        ss << "ROTATION RELATIVE Y AXIS: " << (cam.getRelativeYAxis()?"TRUE":"FALSE")<<endl;
-        ss << endl;
-        ss << "Toogle camera projection mode (ORTHO or PERSPECTIVE):"<< endl;
-        ss << "    press space bar."<< endl;
-        ss << "Toggle mouse input:"<<endl;
-        ss << "    press 'c' key."<< endl;
-        ss << "Toggle camera inertia:"<<endl;
-        ss << "    press 'i' key."<< endl;
-        ss << "Toggle rotation relative Y axis:"<<endl;
-        ss << "    press 'y' key."<< endl;
-        ss << "Toggle this help:"<<endl;
-        ss << "    press 'h' key."<< endl;
-        ss << endl;
-        ss << "camera x,y rotation:" <<endl;
-        ss << "    LEFT MOUSE BUTTON DRAG inside yellow circle"<<endl;
-        ss << endl;
-        ss << "camera z rotation or roll"<<endl;
-        ss << "    LEFT MOUSE BUTTON DRAG outside yellow circle"<<endl;
+        ss << "FPS: " << ofToString(ofGetFrameRate(),0) << "\n\n";
+        ss << "Toggle:\n";
+        ss << "    This help: press 'h' key.\n";
+        ss << "    Fullscreen: press 'f' key.\n";
+        ss << "    Gridlines: press 'g' key.\n\n";
 
-        ss << endl;
-        ss << "move over x,y axis / truck and boom:"<<endl;
-        ss << "    LEFT MOUSE BUTTON DRAG + m"<<endl;
-        ss << "    MIDDLE MOUSE BUTTON PRESS"<<endl;
-        ss << endl;
-        ss << "move over z axis / dolly / zoom in or out:"<<endl;
-        ss << "    RIGHT MOUSE BUTTON DRAG"<<endl;
-        ss << "    VERTICAL SCROLL"<<endl<<endl;
-        if (cam.getOrtho()) {
-            ss << "    Notice that in ortho mode zoom will be centered at the mouse position." << endl;
-        }
+        /*ss << "Toggle fullscreen:\n";
+        ss << "    press 'f' key.\n\n";
+        ss << "Toggle gridlines:\n";
+        ss << "    press 'g' key.\n\n";*/
+        ss << "Reset camera view:\n";
+        ss << "    DOUBLE MOUSE CLICK\n\n";
+        ss << "Camera x,y rotation (pitch+yaw):\n";
+        ss << "    LEFT MOUSE BUTTON DRAG inside yellow circle\n\n";
+        ss << "Camera z rotation (roll):\n";
+        ss << "    LEFT MOUSE BUTTON DRAG outside yellow circle\n\n";
+        ss << "Camera translation (pan):\n";
+        ss << "    LEFT MOUSE BUTTON DRAG + m\n";
+        ss << "    MIDDLE MOUSE BUTTON DRAG\n\n";
+        ss << "Camera zoom:\n";
+        ss << "    RIGHT MOUSE BUTTON DRAG\n";
+        ss << "    VERTICAL SCROLL\n";
+
+        ofSetColor(255);
         ofDrawBitmapString(ss.str().c_str(), 20, 20);
     }
 
+    gui.draw();
+
 }
+
 //--------------------------------------------------------------
 void ofApp::drawInteractionArea(){
 	ofRectangle vp = ofGetCurrentViewport();
@@ -105,32 +122,22 @@ void ofApp::drawInteractionArea(){
 	glDepthMask(true);
 	ofPopStyle();
 }
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	switch(key) {
-      case ' ':
-    	    cam.getOrtho() ? cam.disableOrtho() : cam.enableOrtho();
-            break;
-	    case 'C':
-	    case 'c':
-            cam.getMouseInputEnabled() ? cam.disableMouseInput() : cam.enableMouseInput();
-            break;
 		case 'F':
 		case 'f':
 			ofToggleFullscreen();
 			break;
 		case 'H':
 		case 'h':
-			bHelpText ^=true;
+			bHelpText ^= true;
 			break;
-        case 'I':
-        case 'i':
-		    cam.getInertiaEnabled() ? cam.disableInertia() : cam.enableInertia();
-            break;
-        case 'Y':
-        case 'y':
-            cam.setRelativeYAxis(!cam.getRelativeYAxis());
-            break;
+		case 'G':
+		case 'g':
+			bDrawGrid ^= true;
+			break;
 	}
 }
 
