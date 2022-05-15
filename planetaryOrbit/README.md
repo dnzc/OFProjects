@@ -27,7 +27,7 @@ The simulation is of the solar system, but if needed, other SPICE kernels can be
 
 - Download and install [OpenFrameworks](https://openframeworks.cc/)
 - Download and install [CSPICE](https://naif.jpl.nasa.gov/naif/toolkit_C.html)
-- Create a new OpenFrameworks project
+- Create a new OpenFrameworks project, selecting the ofxGui addon.
 - Download the [src](src/) folder and move the contents to your project src/ folder
 - Compile and run with your preferred method (see OpenFrameworks help page) - be sure to include the CSPICE library
 
