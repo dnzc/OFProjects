@@ -6,11 +6,10 @@
 
 class ofApp : public ofBaseApp {
 	public:
-	
+        // openframeworks boilerplate
 		void setup();
 		void update();
 		void draw();
-		
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -22,17 +21,20 @@ class ofApp : public ofBaseApp {
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);		
-	
 
     private:
+        // draw camera yellow circle
+		void drawInteractionArea(); 
 
-		void drawInteractionArea();
-
+        // user interface booleans
         bool bHelpText;
+        bool bDataText;
         bool bDrawGrid;
 
-		ofEasyCam cam; // add mouse controls for camera movement
+        // the 3d scene camera
+		ofEasyCam cam; 
 
+        // simulate the solar system from 1950 to 2010 (the approximate data range of the kernel) , timestep 24hrs, axis scale 10^7 metres
         Simulator simulator = Simulator(
             {
                 "MERCURY BARYCENTER",
@@ -46,13 +48,19 @@ class ofApp : public ofBaseApp {
             },
             "sun", "1 Jan, 1950", "1 Jan, 2010", 3600*24, 7);
 
+        // gui panel variables
         ofxPanel gui;
         ofxToggle m_showRealPaths;
         ofxToggle m_showKeplerPaths;
         ofxToggle m_showCowellPaths;
-        ofxButton m_playReal;
-        ofxButton m_playKepler;
-        ofxButton m_playCowell;
+        ofxToggle m_showRealBodies;
+        ofxToggle m_showKeplerBodies;
+        ofxToggle m_showCowellBodies;
         ofxIntSlider m_simSpeedSlider;
+        ofxButton m_resetBodies;
+
+        // store when simulation was last started
+        double m_lastPlayTimeMillis;
+        void resetSimTime();
 
 };
