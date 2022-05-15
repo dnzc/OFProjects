@@ -72,7 +72,7 @@ void ofApp::draw(){
         // draw scales
         ofSetColor(255);
         std::stringstream ss;
-        ss << "  /10^" << simulator.getScale() << "m";
+        ss << "  /10^" << simulator.getScale() << "km";
         ofDrawBitmapString(ss.str().c_str(), glm::vec3(450, 0, 0));
         ofDrawBitmapString(ss.str().c_str(), glm::vec3(0, 450, 0));
         ofDrawBitmapString(ss.str().c_str(), glm::vec3(0, 0, 450));
@@ -187,7 +187,7 @@ void ofApp::draw(){
         ss << "Timestep: " << simulator.getDeltaTime() / 3600 << " hrs\n\n";
         if(simulatedTimeElapsed < simulator.getTimeRange()) {
             ss << "Current ephemeris time (seconds after epoch): " << simulatedTimeElapsed << "\n";
-            ss << "Position data (J2000) / 10^" << simulator.getScale() << "m:\n";
+            ss << "Position data (J2000) / 10^" << simulator.getScale() << "km:\n";
             ss << data.str();
         } else {
             ss << "Simulation complete - click 'reset bodies' to run again.";

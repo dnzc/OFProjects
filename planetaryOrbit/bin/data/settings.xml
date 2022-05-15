@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 <group>
-	<show_real>1</show_real>
-	<show_cowell>0</show_cowell>
-	<sim_speed>54545</sim_speed>
+	<show_real_paths>1</show_real_paths>
+	<show_real_bodies>1</show_real_bodies>
+	<show_kepler_paths>0</show_kepler_paths>
+	<show_kepler_bodies>0</show_kepler_bodies>
+	<show_cowell_paths>0</show_cowell_paths>
+	<show_cowell_bodies>0</show_cowell_bodies>
+	<time_speedup_factor>10000000</time_speedup_factor>
 </group>
