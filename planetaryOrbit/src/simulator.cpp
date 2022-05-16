@@ -6,6 +6,8 @@
 #include <utility>
 #include <iostream>
 #include <cmath>
+#include <fstream>
+#include <iomanip>
 
 Simulator::Simulator(std::initializer_list<const char*> bodyNames, const char* observerName, const char* startTime, const char* endTime, float deltaTimeSeconds, int worldScale) : m_observerName(observerName), m_deltaTime(deltaTimeSeconds), m_worldScale(worldScale), m_startTimeStr(startTime), m_endTimeStr(endTime) {
 
@@ -59,6 +61,33 @@ std::vector<ofPolyline> Simulator::getPaths(const char* type) {
             paths.push_back(b.realPath);
     }
     return paths;
+}
+
+void Simulator::dumpPaths(const char* filename) {
+    std::ofstream f;
+    f.open(filename);
+    f << std::fixed << std::setprecision(3); // fix values to 3dp
+    f << "REAL, KEPLER SIMULATED, AND COWELL SIMULATED EPHEMERIS DATA\n";
+    f << "Reference frame: J2000\n";
+    f << "Ephemeris range in seconds after J2000: " << m_startTime << " to " << m_endTime << "\n";
+    f << "\nLine format: [<body name>] <data type> <time elapsed> <x pos> <y pos> <z pos>\n";
+    f << "\nBEGIN DATA\n\n";
+    
+    // output at most 50 ephemeris times, otherwise it will take to long to generate
+    int outputCount = 0;
+    for(double time = 0; time < m_endTime - m_startTime; time += m_deltaTime) {
+        for(auto pair : Simulator::getNamedBarycentersAtTime(time, "real")) {
+            f << "[" << pair.first << "] REAL " << time << " " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
+        };
+        for(auto pair : Simulator::getNamedBarycentersAtTime(time, "kepler")) {
+            f << "[" << pair.first << "] KEPLER " << time << " " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
+        };
+        for(auto pair : Simulator::getNamedBarycentersAtTime(time, "cowell")) {
+            f << "[" << pair.first << "] COWELL " << time << " " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
+        };
+        if(++outputCount >= 50) break;
+    }
+    f.close();
 }
 
 std::vector<std::pair<const char*, ofPoint>> Simulator::getNamedBarycentersAtTime(double timeAfterStart, const char* type) {

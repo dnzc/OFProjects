@@ -29,6 +29,7 @@ class Simulator {
         
         // util functions
         std::vector<ofPolyline> getPaths(const char* type);
+        void dumpPaths(const char* filename);
         int getScale();
         const char* getStartTime();
         const char* getEndTime();

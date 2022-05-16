@@ -12,6 +12,9 @@ void ofApp::setup(){
     simulator.generateKeplerPaths();
     simulator.generateCowellPaths();
 
+    // uncomment the line below to output simulation data to external file
+    simulator.dumpPaths("./simulation_data.txt");
+
     //////////////////////////////
     // initialize GUI
 
@@ -110,7 +113,7 @@ void ofApp::draw(){
     double simulatedTimeElapsed = (double) (ofGetElapsedTimeMillis() - m_lastPlayTimeMillis) / 1000 * m_simSpeedSlider;
 
     stringstream data;
-    data << std::fixed << std::setprecision(3); // round values to 3dp
+    data << std::fixed << std::setprecision(3); // fix values to 3dp
 
     if(m_showRealBodies) {
         ofSetColor(ofColor::cyan);
