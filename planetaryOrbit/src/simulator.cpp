@@ -70,21 +70,26 @@ void Simulator::dumpPaths(const char* filename) {
     f << "REAL, KEPLER SIMULATED, AND COWELL SIMULATED EPHEMERIS DATA\n";
     f << "Reference frame: J2000\n";
     f << "Ephemeris range in seconds after J2000: " << m_startTime << " to " << m_endTime << "\n";
-    f << "\nLine format: [<body name>] <data type> <time elapsed> <x pos> <y pos> <z pos>\n";
+    f << "Timestep: " << m_deltaTime << "\n";
+    f << "xyz scale: 10^" << m_worldScale << "km";
+    f << "\nLine format: [<body name>] <data type> <x pos> <y pos> <z pos>\n";
+    f << "Data is given in chronological order and to 3d.p.\n";
     f << "\nBEGIN DATA\n\n";
     
     // output at most 50 ephemeris times, otherwise it will take to long to generate
     int outputCount = 0;
     for(double time = 0; time < m_endTime - m_startTime; time += m_deltaTime) {
         for(auto pair : Simulator::getNamedBarycentersAtTime(time, "real")) {
-            f << "[" << pair.first << "] REAL " << time << " " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
+            f << "[" << pair.first << "] REAL " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
         };
         for(auto pair : Simulator::getNamedBarycentersAtTime(time, "kepler")) {
-            f << "[" << pair.first << "] KEPLER " << time << " " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
+            f << "[" << pair.first << "] KEPLER " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
         };
         for(auto pair : Simulator::getNamedBarycentersAtTime(time, "cowell")) {
-            f << "[" << pair.first << "] COWELL " << time << " " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
+            f << "[" << pair.first << "] COWELL " << pair.second.x << " " << pair.second.y << " " << pair.second.z << "\n";
         };
+        f << "\n";
+
         if(++outputCount >= 50) break;
     }
     f.close();

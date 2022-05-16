@@ -23,6 +23,9 @@ The "time speedup factor" on the GUI can be used to control how many times faste
 
 The simulation is of the solar system, but if needed, other SPICE kernels can be downloaded to simulate other systems or bodies.
 
+The file [src/graph.py](src/graph.py) can be run to graph the accuracy of the simulations.
+
+
 ## Installation
 
 - Download and install [OpenFrameworks](https://openframeworks.cc/)
@@ -32,3 +35,5 @@ The simulation is of the solar system, but if needed, other SPICE kernels can be
 - Compile and run with your preferred method (see OpenFrameworks help page) - be sure to include the CSPICE library
 
 The files uploaded to this Github page were created on Linux-x64 and compiled with gcc. Thus the executable in bin/ might be runnable on a different computer with the same OS, but it would be best to compile it yourself. See the [screenshots](screenshots/) folder for screenshots of the program running.
+
+To run the python file [src/graph.py](src/graph.py), the directory of the simulation data file in the source code may need to be changed. This file is output by the dumpPaths() function in [src/simulator.cpp](src/simulator.cpp). There is a data file at [bin/simulation_data.txt](bin/simulation_data.txt), so the python file should work if run from the src/ folder with matplotlib installed.
