@@ -13,7 +13,7 @@ void ofApp::setup(){
     simulator.generateCowellPaths();
 
     // uncomment the line below to output simulation data to external file
-    simulator.dumpPaths("./simulation_data.txt");
+    // simulator.dumpPaths("./simulation_data.txt");
 
     //////////////////////////////
     // initialize GUI
