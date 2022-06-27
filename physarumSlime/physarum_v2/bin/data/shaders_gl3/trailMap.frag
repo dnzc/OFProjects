@@ -75,8 +75,8 @@ void main() {
     // apply
     newTrailMap[idx(x, y)] = newVal;
 
-    // vFragColor = lookup_cosine(newVal.x); // cosine interpolation
+    vFragColor = lookup_cosine(newVal.x); // cosine interpolation
     // vFragColor = lookup_linear(newVal.x); // linear interpolation
-    vFragColor = newVal; // no color
+    // vFragColor = newVal; // no color
 
 }

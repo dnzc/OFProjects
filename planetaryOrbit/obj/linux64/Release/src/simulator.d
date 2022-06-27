@@ -316,7 +316,7 @@ obj/linux64/Release/src/simulator.o: \
  /home/dnzc/OpenFrameworks/libs/openFrameworks/video/ofGstUtils.h \
  /usr/include/gstreamer-1.0/gst/gst.h /usr/include/glib-2.0/glib.h \
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
- /usr/lib64/glib-2.0/include/glibconfig.h \
+ /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
  /usr/include/glib-2.0/glib/gversionmacros.h \
  /usr/include/glib-2.0/glib/garray.h \
@@ -397,9 +397,11 @@ obj/linux64/Release/src/simulator.o: \
  /usr/include/glib-2.0/gobject/gmarshal.h \
  /usr/include/glib-2.0/gobject/gboxed.h \
  /usr/include/glib-2.0/gobject/glib-types.h \
+ /usr/include/glib-2.0/gobject/gbindinggroup.h \
  /usr/include/glib-2.0/gobject/genums.h \
  /usr/include/glib-2.0/gobject/glib-enumtypes.h \
  /usr/include/glib-2.0/gobject/gparamspecs.h \
+ /usr/include/glib-2.0/gobject/gsignalgroup.h \
  /usr/include/glib-2.0/gobject/gsourceclosure.h \
  /usr/include/glib-2.0/gobject/gtypemodule.h \
  /usr/include/glib-2.0/gobject/gtypeplugin.h \
@@ -864,7 +866,7 @@ obj/linux64/Release/src/simulator.o: \
 /usr/include/glib-2.0/glib.h:
 /usr/include/glib-2.0/glib/galloca.h:
 /usr/include/glib-2.0/glib/gtypes.h:
-/usr/lib64/glib-2.0/include/glibconfig.h:
+/usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h:
 /usr/include/glib-2.0/glib/gmacros.h:
 /usr/include/glib-2.0/glib/gversionmacros.h:
 /usr/include/glib-2.0/glib/garray.h:
@@ -959,9 +961,11 @@ obj/linux64/Release/src/simulator.o: \
 /usr/include/glib-2.0/gobject/gmarshal.h:
 /usr/include/glib-2.0/gobject/gboxed.h:
 /usr/include/glib-2.0/gobject/glib-types.h:
+/usr/include/glib-2.0/gobject/gbindinggroup.h:
 /usr/include/glib-2.0/gobject/genums.h:
 /usr/include/glib-2.0/gobject/glib-enumtypes.h:
 /usr/include/glib-2.0/gobject/gparamspecs.h:
+/usr/include/glib-2.0/gobject/gsignalgroup.h:
 /usr/include/glib-2.0/gobject/gsourceclosure.h:
 /usr/include/glib-2.0/gobject/gtypemodule.h:
 /usr/include/glib-2.0/gobject/gtypeplugin.h:
